@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" version="3.1" client="site" method="upgrade">
+	<name>mod_sansimera</name>
+	<author>Yiannis Christodoulou (Web357)</author>
+	<creationDate>Oct 2021</creationDate>
+	<copyright>(C) 2021 Web357 - Yiannis Christodoulou.</copyright>
+	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+	<authorEmail>yiannis@web357.com</authorEmail>
+	<authorUrl>www.web357.com</authorUrl>
+	<version>1.0.0</version>
+	<description>San simera module...</description>
+	<files>
+		<filename module="mod_sansimera">mod_sansimera.php</filename>
+		<folder>tmpl</folder>
+		<filename>helper.php</filename>
+	</files>
+</extension>
