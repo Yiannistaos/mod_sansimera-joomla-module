@@ -30,12 +30,46 @@ if (version_compare(JVERSION, '4.0', 'ge'))
 		// get the datetime in correct joomla! time offset
 		$sansimera_datetime = isset($jcFields_arr['sansimera-datetime']) ? $jcFields_arr['sansimera-datetime'] : '';
 		$sansimera_datetime_custom_format = JHTML::_("date", $sansimera_datetime, "d-M-Y");
+
+		// Get image
+		$image = json_decode($item->images);
+		$image_alt = $value = htmlspecialchars($item->title, ENT_QUOTES, 'UTF-8');
+
+		if (!empty($image->image_intro))
+		{
+			$image_src_intro = $image->image_intro;
+			$image_alt = (!empty($image->image_intro_alt)) ? $image->image_intro_alt : $image_alt;
+		}
+		
+		if (!empty($image->image_fulltext))
+		{
+			$image_src_full	= $image->image_fulltext;
+			$image_alt = (!empty($image->image_fulltext_alt)) ? $image->image_fulltext_alt : $image_alt;
+		}
+
+		if (!empty($image->image_intro))
+		{
+			$image = $image_src_intro;
+		}
+		elseif (!empty($image->image_fulltext))
+		{
+			$image = $image_src_full;
+		}
+		else
+		{
+			$image = '';
+		}
 		?>
 
 		<div style="border: 1px solid #ccc; padding: 20px; margin-bottom: 20px;">
-			<a style="font-size: 20px; font-weight: 700;" href="<?php echo $item->link; ?>">
+			<h4>
 				<?php echo $item->title; ?>
-			</a>
+			</h4>
+			<?php if(!empty($image)): ?>
+			<div>
+				<img width="200" src="<?php echo $image_src_full; ?>" alt="<?php echo $image_alt; ?>">
+			</div>
+			<?php endif; ?>
 			<div>
 				<small><?php echo $sansimera_datetime_custom_format; ?></small>
 			</div>
@@ -43,11 +77,6 @@ if (version_compare(JVERSION, '4.0', 'ge'))
 				<p>
 					<?php echo $item->introtext; ?>
 				</p>
-			</div>
-			<div>
-				<a class="btn button btn-primary uk-button" href="<?php echo $item->link; ?>">
-					Διαβάστε περισσότερα
-				</a>
 			</div>
 		</div>
 	<?php endforeach; ?>

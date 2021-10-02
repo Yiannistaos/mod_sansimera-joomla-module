@@ -18,6 +18,7 @@ abstract class ModSanSimeraHelper
 		$query->select($db->quoteName('a.title'));
 		$query->select($db->quoteName('a.alias'));
 		$query->select($db->quoteName('a.introtext'));
+		$query->select($db->quoteName('a.images'));
 		$query->select($db->quoteName('a.state'));
 		$query->select($db->quoteName('f.value'));
 		$query->select('CURDATE() as current_yt_date');
